@@ -56,14 +56,6 @@ if __name__ == '__main__':
 
   if args.name:
     logger.info("Your project name: {}", args.name)
-    if os.path.isdir(os.path.join('projects', args.name)):
-      logger.warning("This project exist")
-      choice = input("If you want to continu will delete this project [y/n]: ")
-      if choice.lower() == 'y':
-        logger.info('Remove project {}', load_config('MAIN', 'main_project'))
-        rmdir(os.path.join('projects', args.name))
-      else:
-        pass
 
     data = {'main_project': os.path.join('projects', args.name)}
     update_config('MAIN', data)
@@ -78,6 +70,15 @@ if __name__ == '__main__':
       print('\t%s' % p)
 
   if args.input:
+    if os.path.isdir(os.path.join('projects', args.name)):
+      logger.warning("This project exist")
+      choice = input("If you want to continu will delete this project [y/n]: ")
+      if choice.lower() == 'y':
+        logger.info('Remove project {}', load_config('MAIN', 'main_project'))
+        rmdir(os.path.join('projects', args.name))
+      else:
+        pass
+
     ex_fw.main(args.input, os.path.join(main_project, 'source'), 'Log.txt')
     for part in PARTITIONS:
       ext4_info = os.path.join(load_config('PYTHON', 'ext4_info'))
