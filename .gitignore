@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 projects/
-Log.txt
+Log*.txt
 config.ini
+tmp
